@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <strings.h>
 
 /*
     Given an empty (NULL) character pointer x and a character pointer y,
@@ -8,7 +9,13 @@
 */
 void string_copy(char *x, char *y)
 {
-
+    int length = strlen(y);
+    for (int i = 0; i < length; i++)
+    {
+        *x = *y;
+        x++;
+        y++;
+    };
 }
 
 /*
@@ -21,7 +28,16 @@ void string_copy(char *x, char *y)
 */
 char *find_char(char *str, int c)
 {
-
+    while (*str > '\0')
+    {
+        if (*str == c)
+        {
+            char *val = str;
+            return val;
+        }
+        str++;
+    }
+    return 0;
 }
 
 /*
@@ -34,7 +50,27 @@ char *find_char(char *str, int c)
 */
 char *find_string(char *haystack, char *needle)
 {
+    char *temp = needle;
 
+    while (*haystack > '\0')
+    {
+        if (*haystack == *needle)
+        {
+            char *first_inst = haystack;
+            while (*needle == *haystack && *needle != '\0')
+            {
+                needle++;
+                haystack++;
+            }
+            if (*needle == '\0')
+            {
+                return first_inst;
+            }
+            needle = temp;
+        }
+        haystack++;
+    }
+    return NULL;
 }
 
 #ifndef TESTING
